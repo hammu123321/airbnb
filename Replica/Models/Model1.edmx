@@ -1,0 +1,1705 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ReplicaAirbnbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="booking_id" />
+          </Key>
+          <Property Name="booking_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="place_id" Type="int" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" Nullable="false" />
+          <Property Name="no_of_adults" Type="int" Nullable="false" />
+          <Property Name="no_of_children" Type="int" />
+          <Property Name="no_of_infants" Type="int" />
+          <Property Name="pets_allowed" Type="bit" Nullable="false" />
+          <Property Name="total_cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="booking_status" Type="int" Nullable="false" />
+          <Property Name="tokens" Type="int" />
+        </EntityType>
+        <EntityType Name="CheckAvailability">
+          <Key>
+            <PropertyRef Name="availability_id" />
+          </Key>
+          <Property Name="availability_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="place_id" Type="int" Nullable="false" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="Checkout">
+          <Key>
+            <PropertyRef Name="checkout_id" />
+          </Key>
+          <Property Name="checkout_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="booking_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="checkin_date" Type="date" Nullable="false" />
+          <Property Name="checkout_date" Type="date" Nullable="false" />
+          <Property Name="checkout_status" Type="int" />
+        </EntityType>
+        <EntityType Name="Nearby">
+          <Key>
+            <PropertyRef Name="nearbyid" />
+          </Key>
+          <Property Name="nearbyid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nearbytype" Type="varchar" MaxLength="50" />
+          <Property Name="typename" Type="varchar" MaxLength="50" />
+          <Property Name="latitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="longitude" Type="decimal" Precision="9" Scale="6" />
+        </EntityType>
+        <EntityType Name="Photogallery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="place_id" Type="int" />
+          <Property Name="image" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="place_id" />
+          </Key>
+          <Property Name="place_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="placetype_id" Type="int" />
+          <Property Name="subtype_id" Type="int" />
+          <Property Name="title" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="nofloors" Type="int" />
+          <Property Name="no_of_beds" Type="int" />
+          <Property Name="description" Type="text" />
+          <Property Name="latitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="longitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="rooms" Type="int" />
+          <Property Name="bathroom" Type="int" />
+          <Property Name="kitchen" Type="int" />
+        </EntityType>
+        <EntityType Name="PlaceServices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="place_id" Type="int" />
+          <Property Name="service_id" Type="int" />
+        </EntityType>
+        <EntityType Name="PlaceSubtype">
+          <Key>
+            <PropertyRef Name="subtype_id" />
+          </Key>
+          <Property Name="subtype_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subtype_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Placetype">
+          <Key>
+            <PropertyRef Name="placetype_id" />
+          </Key>
+          <Property Name="placetype_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="placetype_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReviewsAndRating">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="booking_id" Type="int" Nullable="false" />
+          <Property Name="reviewer_id" Type="int" Nullable="false" />
+          <Property Name="user_reviewee_id" Type="int" />
+          <Property Name="property_reviewee_id" Type="int" />
+          <Property Name="user_rating" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="property_rating" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="user_comment" Type="text" />
+          <Property Name="property_comment" Type="text" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="service_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="gender" Type="varchar" MaxLength="20" />
+          <Property Name="image" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ViewHistory">
+          <Key>
+            <PropertyRef Name="view_id" />
+          </Key>
+          <Property Name="view_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="place_id" Type="int" Nullable="false" />
+          <Property Name="view_count" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Booking__place_i__05D8E0BE">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__151B244E">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__17F790F9">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__18EBB532">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__4589517F">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__467D75B8">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__477199F1">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__4865BE2A">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__52E34C9D">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__53D770D6">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__54CB950F">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__55BFB948">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__04E4BC85">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__160F4887">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__19DFD96B">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__1AD3FDA4">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__4959E263">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__4A4E069C">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__4B422AD5">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__4C364F0E">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__56B3DD81">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__57A801BA">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__589C25F3">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__59904A2C">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__bookin__0880433F">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Checkout" Type="Self.Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="booking_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__bookin__214BF109">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Checkout" Type="Self.Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="booking_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__bookin__66EA454A">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Checkout" Type="Self.Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="booking_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__bookin__67DE6983">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Checkout" Type="Self.Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="booking_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__user_i__09746778">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Checkout" Type="Self.Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__user_i__22401542">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Checkout" Type="Self.Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__user_i__68D28DBC">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Checkout" Type="Self.Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__user_i__69C6B1F5">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Checkout" Type="Self.Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photogall__place__5535A963">
+          <End Role="Place" Type="Self.Place" Multiplicity="0..1" />
+          <End Role="Photogallery" Type="Self.Photogallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Photogallery">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__placetype__41B8C09B">
+          <End Role="Placetype" Type="Self.Placetype" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Placetype">
+              <PropertyRef Name="placetype_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="placetype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__placetype__4F12BBB9">
+          <End Role="Placetype" Type="Self.Placetype" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Placetype">
+              <PropertyRef Name="placetype_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="placetype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__placetype__5165187F">
+          <End Role="Placetype" Type="Self.Placetype" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Placetype">
+              <PropertyRef Name="placetype_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="placetype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__subtype_i__42ACE4D4">
+          <End Role="PlaceSubtype" Type="Self.PlaceSubtype" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceSubtype">
+              <PropertyRef Name="subtype_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="subtype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__subtype_i__5006DFF2">
+          <End Role="PlaceSubtype" Type="Self.PlaceSubtype" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceSubtype">
+              <PropertyRef Name="subtype_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="subtype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__subtype_i__52593CB8">
+          <End Role="PlaceSubtype" Type="Self.PlaceSubtype" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceSubtype">
+              <PropertyRef Name="subtype_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="subtype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__user_id__43A1090D">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__user_id__5070F446">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__user_id__50FB042B">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlaceServ__place__59FA5E80">
+          <End Role="Place" Type="Self.Place" Multiplicity="0..1" />
+          <End Role="PlaceServices" Type="Self.PlaceServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="PlaceServices">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlaceServ__servi__5AEE82B9">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="PlaceServices" Type="Self.PlaceServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="PlaceServices">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Place_CheckAvailability">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="CheckAvailability" Type="Self.CheckAvailability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="CheckAvailability">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReviewsAndRating_Property">
+          <End Role="Place" Type="Self.Place" Multiplicity="0..1" />
+          <End Role="ReviewsAndRating" Type="Self.ReviewsAndRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="ReviewsAndRating">
+              <PropertyRef Name="property_reviewee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReviewsAndRating_Reviewer">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ReviewsAndRating" Type="Self.ReviewsAndRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ReviewsAndRating">
+              <PropertyRef Name="reviewer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReviewsAndRating_User_Reviewee">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ReviewsAndRating" Type="Self.ReviewsAndRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ReviewsAndRating">
+              <PropertyRef Name="user_reviewee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ViewHistory_Place">
+          <End Role="Place" Type="Self.Place" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ViewHistory" Type="Self.ViewHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="ViewHistory">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ViewHistory_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ViewHistory" Type="Self.ViewHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ViewHistory">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReplicaAirbnbModelStoreContainer">
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CheckAvailability" EntityType="Self.CheckAvailability" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Checkout" EntityType="Self.Checkout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nearby" EntityType="Self.Nearby" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photogallery" EntityType="Self.Photogallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaceServices" EntityType="Self.PlaceServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaceSubtype" EntityType="Self.PlaceSubtype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Placetype" EntityType="Self.Placetype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReviewsAndRating" EntityType="Self.ReviewsAndRating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewHistory" EntityType="Self.ViewHistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Booking__place_i__05D8E0BE" Association="Self.FK__Booking__place_i__05D8E0BE">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__151B244E" Association="Self.FK__Booking__place_i__151B244E">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__17F790F9" Association="Self.FK__Booking__place_i__17F790F9">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__18EBB532" Association="Self.FK__Booking__place_i__18EBB532">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__4589517F" Association="Self.FK__Booking__place_i__4589517F">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__467D75B8" Association="Self.FK__Booking__place_i__467D75B8">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__477199F1" Association="Self.FK__Booking__place_i__477199F1">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__4865BE2A" Association="Self.FK__Booking__place_i__4865BE2A">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__52E34C9D" Association="Self.FK__Booking__place_i__52E34C9D">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__53D770D6" Association="Self.FK__Booking__place_i__53D770D6">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__54CB950F" Association="Self.FK__Booking__place_i__54CB950F">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__55BFB948" Association="Self.FK__Booking__place_i__55BFB948">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__04E4BC85" Association="Self.FK__Booking__user_id__04E4BC85">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__160F4887" Association="Self.FK__Booking__user_id__160F4887">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__19DFD96B" Association="Self.FK__Booking__user_id__19DFD96B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__1AD3FDA4" Association="Self.FK__Booking__user_id__1AD3FDA4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__4959E263" Association="Self.FK__Booking__user_id__4959E263">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__4A4E069C" Association="Self.FK__Booking__user_id__4A4E069C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__4B422AD5" Association="Self.FK__Booking__user_id__4B422AD5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__4C364F0E" Association="Self.FK__Booking__user_id__4C364F0E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__56B3DD81" Association="Self.FK__Booking__user_id__56B3DD81">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__57A801BA" Association="Self.FK__Booking__user_id__57A801BA">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__589C25F3" Association="Self.FK__Booking__user_id__589C25F3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__59904A2C" Association="Self.FK__Booking__user_id__59904A2C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__bookin__0880433F" Association="Self.FK__Checkout__bookin__0880433F">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Checkout" EntitySet="Checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__bookin__214BF109" Association="Self.FK__Checkout__bookin__214BF109">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Checkout" EntitySet="Checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__bookin__66EA454A" Association="Self.FK__Checkout__bookin__66EA454A">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Checkout" EntitySet="Checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__bookin__67DE6983" Association="Self.FK__Checkout__bookin__67DE6983">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Checkout" EntitySet="Checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__user_i__09746778" Association="Self.FK__Checkout__user_i__09746778">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Checkout" EntitySet="Checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__user_i__22401542" Association="Self.FK__Checkout__user_i__22401542">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Checkout" EntitySet="Checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__user_i__68D28DBC" Association="Self.FK__Checkout__user_i__68D28DBC">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Checkout" EntitySet="Checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__user_i__69C6B1F5" Association="Self.FK__Checkout__user_i__69C6B1F5">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Checkout" EntitySet="Checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photogall__place__5535A963" Association="Self.FK__Photogall__place__5535A963">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Photogallery" EntitySet="Photogallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__placetype__41B8C09B" Association="Self.FK__Place__placetype__41B8C09B">
+            <End Role="Placetype" EntitySet="Placetype" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__placetype__4F12BBB9" Association="Self.FK__Place__placetype__4F12BBB9">
+            <End Role="Placetype" EntitySet="Placetype" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__placetype__5165187F" Association="Self.FK__Place__placetype__5165187F">
+            <End Role="Placetype" EntitySet="Placetype" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__subtype_i__42ACE4D4" Association="Self.FK__Place__subtype_i__42ACE4D4">
+            <End Role="PlaceSubtype" EntitySet="PlaceSubtype" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__subtype_i__5006DFF2" Association="Self.FK__Place__subtype_i__5006DFF2">
+            <End Role="PlaceSubtype" EntitySet="PlaceSubtype" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__subtype_i__52593CB8" Association="Self.FK__Place__subtype_i__52593CB8">
+            <End Role="PlaceSubtype" EntitySet="PlaceSubtype" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__user_id__43A1090D" Association="Self.FK__Place__user_id__43A1090D">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__user_id__5070F446" Association="Self.FK__Place__user_id__5070F446">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__user_id__50FB042B" Association="Self.FK__Place__user_id__50FB042B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlaceServ__place__59FA5E80" Association="Self.FK__PlaceServ__place__59FA5E80">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="PlaceServices" EntitySet="PlaceServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlaceServ__servi__5AEE82B9" Association="Self.FK__PlaceServ__servi__5AEE82B9">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="PlaceServices" EntitySet="PlaceServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Place_CheckAvailability" Association="Self.FK_Place_CheckAvailability">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="CheckAvailability" EntitySet="CheckAvailability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewsAndRating_Property" Association="Self.FK_ReviewsAndRating_Property">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="ReviewsAndRating" EntitySet="ReviewsAndRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewsAndRating_Reviewer" Association="Self.FK_ReviewsAndRating_Reviewer">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReviewsAndRating" EntitySet="ReviewsAndRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewsAndRating_User_Reviewee" Association="Self.FK_ReviewsAndRating_User_Reviewee">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReviewsAndRating" EntitySet="ReviewsAndRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ViewHistory_Place" Association="Self.FK_ViewHistory_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="ViewHistory" EntitySet="ViewHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ViewHistory_Users" Association="Self.FK_ViewHistory_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ViewHistory" EntitySet="ViewHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReplicaAirbnbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="booking_id" />
+          </Key>
+          <Property Name="booking_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="place_id" Type="Int32" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="no_of_adults" Type="Int32" Nullable="false" />
+          <Property Name="no_of_children" Type="Int32" />
+          <Property Name="no_of_infants" Type="Int32" />
+          <Property Name="pets_allowed" Type="Boolean" Nullable="false" />
+          <Property Name="total_cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="booking_status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="Self.FK__Booking__place_i__05D8E0BE" FromRole="Booking" ToRole="Place" />
+          <NavigationProperty Name="Place1" Relationship="Self.FK__Booking__place_i__151B244E" FromRole="Booking" ToRole="Place" />
+          <NavigationProperty Name="Place2" Relationship="Self.FK__Booking__place_i__17F790F9" FromRole="Booking" ToRole="Place" />
+          <NavigationProperty Name="Place3" Relationship="Self.FK__Booking__place_i__18EBB532" FromRole="Booking" ToRole="Place" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Booking__user_id__04E4BC85" FromRole="Booking" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__Booking__user_id__160F4887" FromRole="Booking" ToRole="Users" />
+          <NavigationProperty Name="User2" Relationship="Self.FK__Booking__user_id__19DFD96B" FromRole="Booking" ToRole="Users" />
+          <NavigationProperty Name="User3" Relationship="Self.FK__Booking__user_id__1AD3FDA4" FromRole="Booking" ToRole="Users" />
+          <NavigationProperty Name="Checkouts" Relationship="ReplicaAirbnbModel.FK__Checkout__bookin__0880433F" FromRole="Booking" ToRole="Checkout" />
+          <Property Name="tokens" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Nearby">
+          <Key>
+            <PropertyRef Name="nearbyid" />
+          </Key>
+          <Property Name="nearbyid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nearbytype" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="typename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="longitude" Type="Decimal" Precision="9" Scale="6" />
+        </EntityType>
+        <EntityType Name="Photogallery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="place_id" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="Self.FK__Photogall__place__5535A963" FromRole="Photogallery" ToRole="Place" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="place_id" />
+          </Key>
+          <Property Name="place_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="placetype_id" Type="Int32" />
+          <Property Name="subtype_id" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="nofloors" Type="Int32" />
+          <Property Name="no_of_beds" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="rooms" Type="Int32" />
+          <Property Name="bathroom" Type="Int32" />
+          <Property Name="kitchen" Type="Int32" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__place_i__05D8E0BE" FromRole="Place" ToRole="Booking" />
+          <NavigationProperty Name="Bookings1" Relationship="Self.FK__Booking__place_i__151B244E" FromRole="Place" ToRole="Booking" />
+          <NavigationProperty Name="Bookings2" Relationship="Self.FK__Booking__place_i__17F790F9" FromRole="Place" ToRole="Booking" />
+          <NavigationProperty Name="Bookings3" Relationship="Self.FK__Booking__place_i__18EBB532" FromRole="Place" ToRole="Booking" />
+          <NavigationProperty Name="Photogalleries" Relationship="Self.FK__Photogall__place__5535A963" FromRole="Place" ToRole="Photogallery" />
+          <NavigationProperty Name="Placetype" Relationship="Self.FK__Place__placetype__5165187F" FromRole="Place" ToRole="Placetype" />
+          <NavigationProperty Name="PlaceSubtype" Relationship="Self.FK__Place__subtype_i__52593CB8" FromRole="Place" ToRole="PlaceSubtype" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Place__user_id__5070F446" FromRole="Place" ToRole="Users" />
+          <NavigationProperty Name="PlaceServices" Relationship="Self.FK__PlaceServ__place__59FA5E80" FromRole="Place" ToRole="PlaceServices" />
+          <NavigationProperty Name="ReviewsAndRatings" Relationship="Self.FK_ReviewsAndRating_Property" FromRole="Place" ToRole="ReviewsAndRating" />
+          <NavigationProperty Name="CheckAvailabilities" Relationship="ReplicaAirbnbModel.FK_Place_CheckAvailability" FromRole="Place" ToRole="CheckAvailability" />
+          <NavigationProperty Name="ViewHistories" Relationship="ReplicaAirbnbModel.FK_ViewHistory_Place" FromRole="Place" ToRole="ViewHistory" />
+        </EntityType>
+        <EntityType Name="PlaceService">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="place_id" Type="Int32" />
+          <Property Name="service_id" Type="Int32" />
+          <NavigationProperty Name="Place" Relationship="Self.FK__PlaceServ__place__59FA5E80" FromRole="PlaceServices" ToRole="Place" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__PlaceServ__servi__5AEE82B9" FromRole="PlaceServices" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="PlaceSubtype">
+          <Key>
+            <PropertyRef Name="subtype_id" />
+          </Key>
+          <Property Name="subtype_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subtype_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Places" Relationship="Self.FK__Place__subtype_i__52593CB8" FromRole="PlaceSubtype" ToRole="Place" />
+        </EntityType>
+        <EntityType Name="Placetype">
+          <Key>
+            <PropertyRef Name="placetype_id" />
+          </Key>
+          <Property Name="placetype_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="placetype_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Places" Relationship="Self.FK__Place__placetype__5165187F" FromRole="Placetype" ToRole="Place" />
+        </EntityType>
+        <EntityType Name="ReviewsAndRating">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="booking_id" Type="Int32" Nullable="false" />
+          <Property Name="reviewer_id" Type="Int32" Nullable="false" />
+          <Property Name="user_reviewee_id" Type="Int32" />
+          <Property Name="property_reviewee_id" Type="Int32" />
+          <Property Name="user_rating" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="property_rating" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="user_comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="property_comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Place" Relationship="Self.FK_ReviewsAndRating_Property" FromRole="ReviewsAndRating" ToRole="Place" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ReviewsAndRating_Reviewer" FromRole="ReviewsAndRating" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_ReviewsAndRating_User_Reviewee" FromRole="ReviewsAndRating" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PlaceServices" Relationship="Self.FK__PlaceServ__servi__5AEE82B9" FromRole="Services" ToRole="PlaceServices" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__user_id__04E4BC85" FromRole="Users" ToRole="Booking" />
+          <NavigationProperty Name="Bookings1" Relationship="Self.FK__Booking__user_id__160F4887" FromRole="Users" ToRole="Booking" />
+          <NavigationProperty Name="Bookings2" Relationship="Self.FK__Booking__user_id__19DFD96B" FromRole="Users" ToRole="Booking" />
+          <NavigationProperty Name="Bookings3" Relationship="Self.FK__Booking__user_id__1AD3FDA4" FromRole="Users" ToRole="Booking" />
+          <NavigationProperty Name="Places" Relationship="Self.FK__Place__user_id__5070F446" FromRole="Users" ToRole="Place" />
+          <NavigationProperty Name="ReviewsAndRatings" Relationship="Self.FK_ReviewsAndRating_Reviewer" FromRole="Users" ToRole="ReviewsAndRating" />
+          <NavigationProperty Name="ReviewsAndRatings1" Relationship="Self.FK_ReviewsAndRating_User_Reviewee" FromRole="Users" ToRole="ReviewsAndRating" />
+          <NavigationProperty Name="Checkouts" Relationship="ReplicaAirbnbModel.FK__Checkout__user_i__09746778" FromRole="User" ToRole="Checkout" />
+          <NavigationProperty Name="ViewHistories" Relationship="ReplicaAirbnbModel.FK_ViewHistory_Users" FromRole="User" ToRole="ViewHistory" />
+        </EntityType>
+        <Association Name="FK__Booking__place_i__05D8E0BE">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__151B244E">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__17F790F9">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__place_i__18EBB532">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__04E4BC85">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__160F4887">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__19DFD96B">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Booking__user_id__1AD3FDA4">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photogall__place__5535A963">
+          <End Role="Place" Type="Self.Place" Multiplicity="0..1" />
+          <End Role="Photogallery" Type="Self.Photogallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="Photogallery">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__placetype__5165187F">
+          <End Role="Placetype" Type="Self.Placetype" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Placetype">
+              <PropertyRef Name="placetype_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="placetype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__subtype_i__52593CB8">
+          <End Role="PlaceSubtype" Type="Self.PlaceSubtype" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceSubtype">
+              <PropertyRef Name="subtype_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="subtype_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Place__user_id__5070F446">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlaceServ__place__59FA5E80">
+          <End Role="Place" Type="Self.Place" Multiplicity="0..1" />
+          <End Role="PlaceServices" Type="Self.PlaceService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="PlaceServices">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReviewsAndRating_Property">
+          <End Role="Place" Type="Self.Place" Multiplicity="0..1" />
+          <End Role="ReviewsAndRating" Type="Self.ReviewsAndRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="ReviewsAndRating">
+              <PropertyRef Name="property_reviewee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlaceServ__servi__5AEE82B9">
+          <End Role="Services" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="PlaceServices" Type="Self.PlaceService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="PlaceServices">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReviewsAndRating_Reviewer">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ReviewsAndRating" Type="Self.ReviewsAndRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ReviewsAndRating">
+              <PropertyRef Name="reviewer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReviewsAndRating_User_Reviewee">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ReviewsAndRating" Type="Self.ReviewsAndRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ReviewsAndRating">
+              <PropertyRef Name="user_reviewee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReplicaAirbnbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bookings" EntityType="Self.Booking" />
+          <EntitySet Name="Nearbies" EntityType="Self.Nearby" />
+          <EntitySet Name="Photogalleries" EntityType="Self.Photogallery" />
+          <EntitySet Name="Places" EntityType="Self.Place" />
+          <EntitySet Name="PlaceServices" EntityType="Self.PlaceService" />
+          <EntitySet Name="PlaceSubtypes" EntityType="Self.PlaceSubtype" />
+          <EntitySet Name="Placetypes" EntityType="Self.Placetype" />
+          <EntitySet Name="ReviewsAndRatings" EntityType="Self.ReviewsAndRating" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Booking__place_i__05D8E0BE" Association="Self.FK__Booking__place_i__05D8E0BE">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__151B244E" Association="Self.FK__Booking__place_i__151B244E">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__17F790F9" Association="Self.FK__Booking__place_i__17F790F9">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__place_i__18EBB532" Association="Self.FK__Booking__place_i__18EBB532">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__04E4BC85" Association="Self.FK__Booking__user_id__04E4BC85">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__160F4887" Association="Self.FK__Booking__user_id__160F4887">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__19DFD96B" Association="Self.FK__Booking__user_id__19DFD96B">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Booking__user_id__1AD3FDA4" Association="Self.FK__Booking__user_id__1AD3FDA4">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photogall__place__5535A963" Association="Self.FK__Photogall__place__5535A963">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="Photogallery" EntitySet="Photogalleries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__placetype__5165187F" Association="Self.FK__Place__placetype__5165187F">
+            <End Role="Placetype" EntitySet="Placetypes" />
+            <End Role="Place" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__subtype_i__52593CB8" Association="Self.FK__Place__subtype_i__52593CB8">
+            <End Role="PlaceSubtype" EntitySet="PlaceSubtypes" />
+            <End Role="Place" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Place__user_id__5070F446" Association="Self.FK__Place__user_id__5070F446">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Place" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlaceServ__place__59FA5E80" Association="Self.FK__PlaceServ__place__59FA5E80">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="PlaceServices" EntitySet="PlaceServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewsAndRating_Property" Association="Self.FK_ReviewsAndRating_Property">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="ReviewsAndRating" EntitySet="ReviewsAndRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlaceServ__servi__5AEE82B9" Association="Self.FK__PlaceServ__servi__5AEE82B9">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="PlaceServices" EntitySet="PlaceServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewsAndRating_Reviewer" Association="Self.FK_ReviewsAndRating_Reviewer">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReviewsAndRating" EntitySet="ReviewsAndRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReviewsAndRating_User_Reviewee" Association="Self.FK_ReviewsAndRating_User_Reviewee">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReviewsAndRating" EntitySet="ReviewsAndRatings" />
+          </AssociationSet>
+          <EntitySet Name="CheckAvailabilities" EntityType="ReplicaAirbnbModel.CheckAvailability" />
+          <AssociationSet Name="FK_Place_CheckAvailability" Association="ReplicaAirbnbModel.FK_Place_CheckAvailability">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="CheckAvailability" EntitySet="CheckAvailabilities" />
+          </AssociationSet>
+          <EntitySet Name="Checkouts" EntityType="ReplicaAirbnbModel.Checkout" />
+          <AssociationSet Name="FK__Checkout__bookin__0880433F" Association="ReplicaAirbnbModel.FK__Checkout__bookin__0880433F">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="Checkout" EntitySet="Checkouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Checkout__user_i__09746778" Association="ReplicaAirbnbModel.FK__Checkout__user_i__09746778">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Checkout" EntitySet="Checkouts" />
+          </AssociationSet>
+          <EntitySet Name="ViewHistories" EntityType="ReplicaAirbnbModel.ViewHistory" />
+          <AssociationSet Name="FK_ViewHistory_Place" Association="ReplicaAirbnbModel.FK_ViewHistory_Place">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="ViewHistory" EntitySet="ViewHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ViewHistory_Users" Association="ReplicaAirbnbModel.FK_ViewHistory_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ViewHistory" EntitySet="ViewHistories" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="CheckAvailability">
+          <Key>
+            <PropertyRef Name="availability_id" />
+          </Key>
+          <Property Name="availability_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="place_id" Type="Int32" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="status" Type="Int32" />
+          <NavigationProperty Name="Place" Relationship="ReplicaAirbnbModel.FK_Place_CheckAvailability" FromRole="CheckAvailability" ToRole="Place" />
+        </EntityType>
+        <Association Name="FK_Place_CheckAvailability">
+          <End Type="ReplicaAirbnbModel.Place" Role="Place" Multiplicity="1" />
+          <End Type="ReplicaAirbnbModel.CheckAvailability" Role="CheckAvailability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="CheckAvailability">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Checkout">
+          <Key>
+            <PropertyRef Name="checkout_id" />
+          </Key>
+          <Property Name="checkout_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="booking_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="checkin_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="checkout_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="checkout_status" Type="Int32" />
+          <NavigationProperty Name="Booking" Relationship="ReplicaAirbnbModel.FK__Checkout__bookin__0880433F" FromRole="Checkout" ToRole="Booking" />
+          <NavigationProperty Name="User" Relationship="ReplicaAirbnbModel.FK__Checkout__user_i__09746778" FromRole="Checkout" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Checkout__bookin__0880433F">
+          <End Type="ReplicaAirbnbModel.Booking" Role="Booking" Multiplicity="1" />
+          <End Type="ReplicaAirbnbModel.Checkout" Role="Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="booking_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Checkout__user_i__09746778">
+          <End Type="ReplicaAirbnbModel.User" Role="User" Multiplicity="1" />
+          <End Type="ReplicaAirbnbModel.Checkout" Role="Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ViewHistory">
+          <Key>
+            <PropertyRef Name="view_id" />
+          </Key>
+          <Property Name="view_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="place_id" Type="Int32" Nullable="false" />
+          <Property Name="view_count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Place" Relationship="ReplicaAirbnbModel.FK_ViewHistory_Place" FromRole="ViewHistory" ToRole="Place" />
+          <NavigationProperty Name="User" Relationship="ReplicaAirbnbModel.FK_ViewHistory_Users" FromRole="ViewHistory" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ViewHistory_Place">
+          <End Type="ReplicaAirbnbModel.Place" Role="Place" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ReplicaAirbnbModel.ViewHistory" Role="ViewHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="place_id" />
+            </Principal>
+            <Dependent Role="ViewHistory">
+              <PropertyRef Name="place_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ViewHistory_Users">
+          <End Type="ReplicaAirbnbModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ReplicaAirbnbModel.ViewHistory" Role="ViewHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="ViewHistory">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReplicaAirbnbModelStoreContainer" CdmEntityContainer="ReplicaAirbnbEntities1">
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="tokens" ColumnName="tokens" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="place_id" ColumnName="place_id" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="no_of_adults" ColumnName="no_of_adults" />
+                <ScalarProperty Name="no_of_children" ColumnName="no_of_children" />
+                <ScalarProperty Name="no_of_infants" ColumnName="no_of_infants" />
+                <ScalarProperty Name="pets_allowed" ColumnName="pets_allowed" />
+                <ScalarProperty Name="total_cost" ColumnName="total_cost" />
+                <ScalarProperty Name="booking_status" ColumnName="booking_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nearbies">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.Nearby">
+              <MappingFragment StoreEntitySet="Nearby">
+                <ScalarProperty Name="nearbyid" ColumnName="nearbyid" />
+                <ScalarProperty Name="nearbytype" ColumnName="nearbytype" />
+                <ScalarProperty Name="typename" ColumnName="typename" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photogalleries">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.Photogallery">
+              <MappingFragment StoreEntitySet="Photogallery">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="place_id" ColumnName="place_id" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="place_id" ColumnName="place_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="placetype_id" ColumnName="placetype_id" />
+                <ScalarProperty Name="subtype_id" ColumnName="subtype_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="nofloors" ColumnName="nofloors" />
+                <ScalarProperty Name="no_of_beds" ColumnName="no_of_beds" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="rooms" ColumnName="rooms" />
+                <ScalarProperty Name="bathroom" ColumnName="bathroom" />
+                <ScalarProperty Name="kitchen" ColumnName="kitchen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaceServices">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.PlaceService">
+              <MappingFragment StoreEntitySet="PlaceServices">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="place_id" ColumnName="place_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaceSubtypes">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.PlaceSubtype">
+              <MappingFragment StoreEntitySet="PlaceSubtype">
+                <ScalarProperty Name="subtype_id" ColumnName="subtype_id" />
+                <ScalarProperty Name="subtype_name" ColumnName="subtype_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Placetypes">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.Placetype">
+              <MappingFragment StoreEntitySet="Placetype">
+                <ScalarProperty Name="placetype_id" ColumnName="placetype_id" />
+                <ScalarProperty Name="placetype_name" ColumnName="placetype_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReviewsAndRatings">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.ReviewsAndRating">
+              <MappingFragment StoreEntitySet="ReviewsAndRating">
+                <ScalarProperty Name="review_id" ColumnName="review_id" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="reviewer_id" ColumnName="reviewer_id" />
+                <ScalarProperty Name="user_reviewee_id" ColumnName="user_reviewee_id" />
+                <ScalarProperty Name="property_reviewee_id" ColumnName="property_reviewee_id" />
+                <ScalarProperty Name="user_rating" ColumnName="user_rating" />
+                <ScalarProperty Name="property_rating" ColumnName="property_rating" />
+                <ScalarProperty Name="user_comment" ColumnName="user_comment" />
+                <ScalarProperty Name="property_comment" ColumnName="property_comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.Service">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="service_name" ColumnName="service_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CheckAvailabilities">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.CheckAvailability">
+              <MappingFragment StoreEntitySet="CheckAvailability">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="place_id" ColumnName="place_id" />
+                <ScalarProperty Name="availability_id" ColumnName="availability_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Checkouts">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.Checkout">
+              <MappingFragment StoreEntitySet="Checkout">
+                <ScalarProperty Name="checkout_status" ColumnName="checkout_status" />
+                <ScalarProperty Name="checkout_date" ColumnName="checkout_date" />
+                <ScalarProperty Name="checkin_date" ColumnName="checkin_date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+                <ScalarProperty Name="checkout_id" ColumnName="checkout_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewHistories">
+            <EntityTypeMapping TypeName="ReplicaAirbnbModel.ViewHistory">
+              <MappingFragment StoreEntitySet="ViewHistory">
+                <ScalarProperty Name="view_count" ColumnName="view_count" />
+                <ScalarProperty Name="place_id" ColumnName="place_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="view_id" ColumnName="view_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
