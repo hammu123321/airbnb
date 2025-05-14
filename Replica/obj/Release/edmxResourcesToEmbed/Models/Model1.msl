@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReplicaAirbnbModelStoreContainer" CdmEntityContainer="ReplicaAirbnbEntities1">
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="tokens" ColumnName="tokens" />
+          <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="place_id" ColumnName="place_id" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="no_of_adults" ColumnName="no_of_adults" />
+          <ScalarProperty Name="no_of_children" ColumnName="no_of_children" />
+          <ScalarProperty Name="no_of_infants" ColumnName="no_of_infants" />
+          <ScalarProperty Name="pets_allowed" ColumnName="pets_allowed" />
+          <ScalarProperty Name="total_cost" ColumnName="total_cost" />
+          <ScalarProperty Name="booking_status" ColumnName="booking_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nearbies">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.Nearby">
+        <MappingFragment StoreEntitySet="Nearby">
+          <ScalarProperty Name="nearbyid" ColumnName="nearbyid" />
+          <ScalarProperty Name="nearbytype" ColumnName="nearbytype" />
+          <ScalarProperty Name="typename" ColumnName="typename" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photogalleries">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.Photogallery">
+        <MappingFragment StoreEntitySet="Photogallery">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="place_id" ColumnName="place_id" />
+          <ScalarProperty Name="image" ColumnName="image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Places">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.Place">
+        <MappingFragment StoreEntitySet="Place">
+          <ScalarProperty Name="place_id" ColumnName="place_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="placetype_id" ColumnName="placetype_id" />
+          <ScalarProperty Name="subtype_id" ColumnName="subtype_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="nofloors" ColumnName="nofloors" />
+          <ScalarProperty Name="no_of_beds" ColumnName="no_of_beds" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="rooms" ColumnName="rooms" />
+          <ScalarProperty Name="bathroom" ColumnName="bathroom" />
+          <ScalarProperty Name="kitchen" ColumnName="kitchen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlaceServices">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.PlaceService">
+        <MappingFragment StoreEntitySet="PlaceServices">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="place_id" ColumnName="place_id" />
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlaceSubtypes">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.PlaceSubtype">
+        <MappingFragment StoreEntitySet="PlaceSubtype">
+          <ScalarProperty Name="subtype_id" ColumnName="subtype_id" />
+          <ScalarProperty Name="subtype_name" ColumnName="subtype_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Placetypes">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.Placetype">
+        <MappingFragment StoreEntitySet="Placetype">
+          <ScalarProperty Name="placetype_id" ColumnName="placetype_id" />
+          <ScalarProperty Name="placetype_name" ColumnName="placetype_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewsAndRatings">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.ReviewsAndRating">
+        <MappingFragment StoreEntitySet="ReviewsAndRating">
+          <ScalarProperty Name="review_id" ColumnName="review_id" />
+          <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+          <ScalarProperty Name="reviewer_id" ColumnName="reviewer_id" />
+          <ScalarProperty Name="user_reviewee_id" ColumnName="user_reviewee_id" />
+          <ScalarProperty Name="property_reviewee_id" ColumnName="property_reviewee_id" />
+          <ScalarProperty Name="user_rating" ColumnName="user_rating" />
+          <ScalarProperty Name="property_rating" ColumnName="property_rating" />
+          <ScalarProperty Name="user_comment" ColumnName="user_comment" />
+          <ScalarProperty Name="property_comment" ColumnName="property_comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.Service">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="service_name" ColumnName="service_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="image" ColumnName="image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CheckAvailabilities">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.CheckAvailability">
+        <MappingFragment StoreEntitySet="CheckAvailability">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="place_id" ColumnName="place_id" />
+          <ScalarProperty Name="availability_id" ColumnName="availability_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Checkouts">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.Checkout">
+        <MappingFragment StoreEntitySet="Checkout">
+          <ScalarProperty Name="checkout_status" ColumnName="checkout_status" />
+          <ScalarProperty Name="checkout_date" ColumnName="checkout_date" />
+          <ScalarProperty Name="checkin_date" ColumnName="checkin_date" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+          <ScalarProperty Name="checkout_id" ColumnName="checkout_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewHistories">
+      <EntityTypeMapping TypeName="ReplicaAirbnbModel.ViewHistory">
+        <MappingFragment StoreEntitySet="ViewHistory">
+          <ScalarProperty Name="view_count" ColumnName="view_count" />
+          <ScalarProperty Name="place_id" ColumnName="place_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="view_id" ColumnName="view_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

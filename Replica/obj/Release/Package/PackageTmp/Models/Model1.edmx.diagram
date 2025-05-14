@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a11c0f0b63245b3976cbed0437a7a8f" Name="Diagram1">
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.Booking" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.Nearby" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.Photogallery" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.Place" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.PlaceService" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.PlaceSubtype" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.Placetype" Width="1.5" PointX="3.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.ReviewsAndRating" Width="1.5" PointX="11.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.Service" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.User" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Booking__place_i__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Booking__place_i__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Booking__place_i__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Booking__place_i__18EBB532" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Booking__user_id__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Booking__user_id__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Booking__user_id__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Booking__user_id__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Photogall__place__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Place__placetype__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Place__subtype_i__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Place__user_id__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__PlaceServ__place__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK_ReviewsAndRating_Property" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__PlaceServ__servi__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK_ReviewsAndRating_Reviewer" ManuallyRouted="false" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK_ReviewsAndRating_User_Reviewee" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.CheckAvailability" Width="1.5" PointX="8.25" PointY="10.625" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK_Place_CheckAvailability" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.Checkout" Width="1.5" PointX="11.25" PointY="3.375" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Checkout__bookin__0880433F" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK__Checkout__user_i__09746778" />
+        <EntityTypeShape EntityType="ReplicaAirbnbModel.ViewHistory" Width="1.5" PointX="11.25" PointY="11.625" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK_ViewHistory_Place" />
+        <AssociationConnector Association="ReplicaAirbnbModel.FK_ViewHistory_Users" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
